@@ -23,8 +23,6 @@ hd:
 	db "HD      DV  "
 tty:
 	db "TTY     DV  "
-console:
-	db "CON     DV  "
 keyboard:
 	db "KEY     DV  "
 shell:
@@ -63,14 +61,6 @@ start:
 	mov ax,[read_add]
 	mov [driver_desc_add+10],ax
 	mov ax,tty
-	mov [name_add],ax
-	mov ax,[find_by_name_add]
-	call ax
-	mov ax,CONSOLE
-	mov [driver_desc_add+12],ax
-	mov ax,[read_add]
-	mov [driver_desc_add+14],ax
-	mov ax,console
 	mov [name_add],ax
 	mov ax,[find_by_name_add]
 	call ax
