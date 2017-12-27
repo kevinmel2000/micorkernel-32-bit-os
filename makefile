@@ -58,9 +58,7 @@ test:
 	sudo cp key.dv fd -v
 	sudo cp shl.dv fd -v
 	sudo cp tty.dv fd -v
-	sudo cp con.dv fd -v
 ############################################
 	sudo umount fd
 # put the boot into the head of img file
 	dd if=boot.bin of=myos.img bs=512 count=1 conv=notrunc
-#############################################

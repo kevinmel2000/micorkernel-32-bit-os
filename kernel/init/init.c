@@ -40,7 +40,6 @@ void set_init_task()
   pde_add[1]=kernel_pde[1]|PAGE_USER;
   for(i=0;i<1024;i++)
     {
-      pte_add[i]=NULL;
     }
   pde_add[2]=((unsigned int)pte_add)|PAGE_PRESENT|PAGE_USER|PAGE_WRITE;
   for(i=3;i<page_number;i++)

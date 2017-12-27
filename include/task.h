@@ -96,6 +96,7 @@ extern void unlock(unsigned int pid);
 //extern int task_alloc(void *proc_entry,unsigned int addres,int gdt_tss,int gdt_ldt,int pid,int owner);
 //extern void copy_stack(char *src,char *aim,int size);
 //extern int alloc_stack(int size);
+extern int set_task(void (*task)(),unsigned priority);
 extern unsigned int find_empty_process();
 extern unsigned int find_empty_gdt();
 extern void free_process(unsigned int pid);

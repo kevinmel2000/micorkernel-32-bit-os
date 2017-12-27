@@ -1,7 +1,8 @@
+#include <myos.h>
 #include <task.h>
 #include <kernel.h>
 
-// initialize the pro list 
+// initialize the pro list
 void reset_tasks()
 {
   int i;
@@ -96,7 +97,7 @@ unsigned int find_empty_process()
 	  return i;
 	}
     }
-  return 0; 
+  return 0;
 }
 
 // release a place from the task table
@@ -156,3 +157,39 @@ void unlock(unsigned int pid)
   t_list->task_struct_add[pid]->status=RUNNING;
 }
 
+int set_task(void (*task_entry)(),unsigned priority)
+{
+  unsigned int task_add=alloc_memory(KERNEL_SPACE,SIZE_OF_PAGE);
+  unsigned int pde_add=kernel_page_add;
+  struct task *new_task=(struct task*)task_add;
+  copy_memory((char*)t_list->task_struct_add[0]->this_ldt,(char*)new_task->this_ldt,LDT_SIZE*sizeof(ldt));
+  new_task->tasc.cr3=kernel_page_add;
+  new_task->tasc.eip=(unsigned int)task_entry;
+  new_task->tasc.eflags=KERNEL_EFLAG;
+  new_task->tasc.eax= new_task->tasc.ecx=\
+  new_task->tasc.edx= new_task->tasc.ebx=\
+  new_task->tasc.edi= new_task->tasc.edi=0;
+  new_task->tasc.esp= new_task->tasc.ebp=task_add+SIZE_OF_PAGE;
+  new_task->tasc.es=  new_task->tasc.ds=\
+  new_task->tasc.fs=  new_task->tasc.gs=\
+  new_task->tasc.ss=(DS_LDT<<3)|LDT_SELECTOR;
+  new_task->tasc.cs=(CS_LDT<<3)|LDT_SELECTOR;
+  new_task->tasc.iomap_base=NORMAL_IOMAPBASE;
+  new_task->status=RUNNING;
+  new_task->time=2;
+  new_task->entry=(unsigned int)task_entry;
+  unsigned int new_task_gdt=find_empty_gdt();
+  unsigned int new_task_pid=find_empty_process();
+  new_task->tasc.ldt=(new_task_gdt+1)<<3;
+  set_gdt(&gdt_addr[new_task_gdt],(unsigned int)&new_task->tasc,TSS_SIZE,TSS_DESCRIB);
+  set_gdt(&gdt_addr[new_task_gdt+1],(unsigned int)new_task->this_ldt,LDT_SIZE*sizeof(ldt)-1,LDT_DESCRIB);
+  new_task->selector=new_task_gdt<<3;
+  new_task->proce_memory.not_allocted=NULL;
+  new_task->father=-1;
+  new_task->child=-1;
+  new_task->brother=-1;
+  t_list->task_struct_add[new_task_pid]=new_task;
+
+  return 0;
+
+}

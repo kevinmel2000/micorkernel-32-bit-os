@@ -7,6 +7,9 @@
 #define NO_SINGAL ~SIGNAL
 #define REDEF_SIGNAL 0x8001
 #define RECOV_SIGNAL ~REDEF_SIGNAL
+
+#include <../signal.h>
+
 extern void process_manage();
 extern void set_pm_task();
 extern int do_fork(unsigned int father);

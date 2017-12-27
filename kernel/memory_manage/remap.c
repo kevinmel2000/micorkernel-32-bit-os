@@ -1,3 +1,4 @@
+#include <myos.h>
 #include <memory_manage/memory_manage.h>
 #include <task.h>
 #include <memory.h>
@@ -89,11 +90,11 @@ int insert_remap_list(int pid,struct remap_list *l,unsigned int line)
   // check the new allocted memory space
   if(another_list==NULL)
     {
-      // another should not be NULL 
+      // another should not be NULL
       return 0;
     }
 
-  // initial the new allocted remap list 
+  // initial the new allocted remap list
   for(i=0;i<REMAP_LIST_LENGTH;i++)
     {
       another_list->remap[i].pid=-1;

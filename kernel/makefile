@@ -1,5 +1,7 @@
-GCC=gcc -I ../include/ -c -o
+NO_STDLIB=-nostdlib -fno-builtin
+GCC=gcc -I ../include/ $(NO_STDLIB) -c -o
 NASM=nasm -f elf -o
+
 kernel:
 	$(GCC) ../myos.o myos.c
 	$(GCC) ../task.o task.c

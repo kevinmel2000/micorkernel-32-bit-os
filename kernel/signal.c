@@ -1,3 +1,4 @@
+#include <myos.h>
 #include <signal.h>
 #include <task.h>
 #include <memory.h>
@@ -7,7 +8,7 @@ void dft_signal_handle()
   return;
 }
 
-// find the specifeic signal handler 
+// find the specifeic signal handler
 void* find_signal_handler(int pid,unsigned int signal)
 {
   int i;
@@ -86,7 +87,7 @@ int waitting_this_signal(int pid,unsigned int signal,struct signal_wait_list *l)
   return -1;
 }
 
-// clear what this peocess want from signal_wait_list 
+// clear what this peocess want from signal_wait_list
 void clear_signal_wait_list(int pid,struct signal_wait_list *l)
 {
   int i=0;
@@ -102,7 +103,7 @@ void clear_signal_wait_list(int pid,struct signal_wait_list *l)
 
 void do_signal(int pid,unsigned int signal)
 {
-  //fix the user stack 
+  //fix the user stack
   //change the kernel level stack
   //change ip point to signal_handle_entry() function
 
@@ -120,7 +121,7 @@ void do_signal(int pid,unsigned int signal)
       while(1);
     }
   //the speciefic proce is waitting for a message,
-  //  OK,then everything is easy 
+  //  OK,then everything is easy
   if(pro->msg_m.status==WAIT_RECEIVE)
     {
       struct message msg;
@@ -130,7 +131,7 @@ void do_signal(int pid,unsigned int signal)
       send_message(&msg);
     }
 
-  // speciefic is running, we should reset the stack space 
+  // speciefic is running, we should reset the stack space
   // get ring0 level esp pointer
   unsigned int line_kernel_esp=pro->tasc.esp;
 

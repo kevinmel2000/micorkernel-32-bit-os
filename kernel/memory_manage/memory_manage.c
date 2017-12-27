@@ -1,3 +1,4 @@
+#include <myos.h>
 #include <memory_manage/memory_manage.h>
 #include <task.h>
 #include <memory.h>
