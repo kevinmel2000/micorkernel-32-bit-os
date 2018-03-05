@@ -3,15 +3,6 @@
 #define NULL        0
 #define RUNNING     1 
 #define BLOCKED     2
-//#define WAIT_MSG    4
-//#define WAIT_SEND   5
-//#define SEND        6
-//#define RECEIVE     7
-//#define ROUND_TRIP  8
-//#define INTERRUPT   9
-//#define KNOW_MY_HD  10
-//#define EMPTY       0xffffffff
-/////////////////////////////////////////
 #define KERNEL_ADD      0x500
 #define KERNEL_SIZE_ADD 0x502 
 #define DRIVER_NUM      0x504

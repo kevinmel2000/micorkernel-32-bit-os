@@ -31,14 +31,10 @@ void init_dft_interupt(int *esp)
 }
 void dft_handler(int *esp)
 {
-  // while(1);
-  //playd();
   return;
 }
 void dft_handler_ec(unsigned int error_ip,unsigned int error_code)
 {
-  // while(1);
-  //playd();
   return;
 }
 void  dft_send_recv(void *msg)

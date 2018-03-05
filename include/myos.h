@@ -14,7 +14,5 @@ extern void init_gdt_idt(unsigned int kernel_size);
 extern void init_task_sys();
 extern int strcmp(char *s1,char *s2);
 extern void playb();
-//unsigned int *free_mem_add;
-//unsigned int *free_mem_add_high;
 unsigned int kernel_size;
 #endif
